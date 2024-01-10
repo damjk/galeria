@@ -239,18 +239,32 @@
         <img id="imagenAmpliada" src="" alt="Imagen Ampliada">
     </div>
 
-    <script>
-        function ampliarImagen(src, descripcion) {
-            var imagenAmpliada = document.getElementById('imagenAmpliada');
-            imagenAmpliada.src = src;
-            imagenAmpliada.alt = descripcion;
-            document.querySelector('.imagen-ampliada').style.display = 'flex';
-        }
+   <script>
+    var scrollPosition;
 
-        function cerrarImagen() {
-            document.querySelector('.imagen-ampliada').style.display = 'none';
-        }
-    </script>
+    function ampliarImagen(src, descripcion) {
+        // Guardar la posición actual del scroll
+        scrollPosition = window.scrollY;
+
+        var imagenAmpliada = document.getElementById('imagenAmpliada');
+        imagenAmpliada.src = src;
+        imagenAmpliada.alt = descripcion;
+        document.querySelector('.imagen-ampliada').style.display = 'flex';
+
+        // Deshabilitar el scroll de la página mientras la imagen está ampliada
+        document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarImagen() {
+        // Restaurar la posición del scroll
+        window.scrollTo(0, scrollPosition);
+
+        document.querySelector('.imagen-ampliada').style.display = 'none';
+
+        // Habilitar nuevamente el scroll de la página
+        document.body.style.overflow = 'visible';
+    }
+</script>
 
 
   
