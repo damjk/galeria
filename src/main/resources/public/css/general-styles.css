@@ -1,21 +1,45 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
+    text-align: center;    
+    background: url('../fondo.jpg') no-repeat center center fixed;
+    background-size: cover;
+    
+    margin: 0;
+    padding: 0;
+    
+    
 }
 
 
 
-h1 {
+
+h4 {
     font-family: 'Georgia', serif; /* Puedes cambiar 'Georgia' por la fuente que prefieras para el título */
-    /* Otros estilos de título si es necesario */
     margin-top: 60px;
     text-align: center;
+    color: #fff;
 }
+
+
+.titulo {
+            font-family: 'Arial', sans-serif;
+            font-size: 32px;
+            font-weight: bold;
+            text-align: center;
+            color: #fff; /* Cambié el color a blanco */
+            
+            padding: 10px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+            background: transparent;
+        }
+        
 
 .hero-image {
     background-image: url("../GeSoc.png");
-    background-color: #cccccc;
+      color: #fff;
     height: 400px;
     background-position: center;
     background-repeat: no-repeat;
@@ -28,7 +52,7 @@ h1 {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: black;
+     color: #fff;
     margin: 30px;
     background-color: white;
     opacity: 0.6;
@@ -49,17 +73,24 @@ h1 {
 .mi-tabla {
     border-collapse: collapse;
     width: 100%;
+    text-align: center;
 }
 
 .mi-tabla img {
     max-width: 100%;
     height: auto;
+     text-align: center;
+     border: 2px solid #000;
+     border-radius: 10px;
+    
 }
 
 .mi-tabla td {
     padding: 20px;
     text-align: center;
     position: relative; /* Añade posición relativa para que las posiciones absolutas se basen en este elemento */
+    color: #fff;
+    
 }
 
 .mi-tabla figcaption {
@@ -68,7 +99,7 @@ h1 {
     font-style: italic;
     font-weight: bold; /* Hace que el texto sea negrita */
     margin-top: 8px;
-    color: #555;
+   color: #fff;
 }
 
 .mi-tabla p {
