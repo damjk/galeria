@@ -1,0 +1,106 @@
+{{#partial "tabla"}}
+    <script>
+        function eliminarpublicacion(idPublicacion) {
+
+            $.ajax({
+                url: '/eliminarpublicacion/' + idPublicacion,
+                type: 'DELETE',
+                success: function (result) {
+                    window.location = "/publicaciones"
+                }
+            });
+        }
+    </script>
+    
+     
+    <a class="btn btn-primary mb-sm-3" href="/publicaciones/perdidas" role="button">Filtro Perdida</a>
+    <a class="btn btn-primary mb-sm-3" href="/publicaciones/intereses" role="button">Filtro Interes</a>        
+    <a class="btn btn-primary mb-sm-3" href="/publicaciones/adopcion" role="button">Filtro Adopcion</a>
+     
+    <table class="table">
+        <thead>
+        <tr class="thead-light">
+            <th class="text-center" scope="col">#</th>
+            <th class="text-center" scope="col">Usuario</th> 
+            <th class="text-center" scope="col">Mascota</th>
+            <th class="text-center" scope="col">Asociacion</th>     
+            <th class="text-center" scope="col">Estado Publicacion</th>     
+            <th class="text-center" scope="col">Tipo Publicacion</th>             
+            <th class="text-center" scope="col">Acciones</th>
+            <th class="text-center" scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        {{#each publicaciones}}
+            <tr>
+            
+                <td class="text-center" scope="row">{{idPublicacion}}</td>
+                <td class="text-center">{{autor.persona.nombre}}</td>
+                <td class="text-center">{{mascota.nombre}}</td>
+                <td class="text-center">{{asociacion.nombre}}</td>
+                <td class="text-center">{{estado}}</td>
+                <td class="text-center">{{tipo}}</td>
+
+                <td class="text-center">
+
+                    {{#if esDelUser}}
+                    <a class="btn btn-link" href="/publicaciones/editar/{{idPublicacion}}">
+                        <i class="fas fa-pen"></i>
+                    </a>
+                    {{/if}}
+
+
+                    <a class="btn btn-link" href="/publicaciones/detalle/{{idPublicacion}}">
+                        <i class="fas fa-eye"></i>
+                    </a>
+
+                    {{#if esDelUser}}
+                    <a class="btn btn-link" data-toggle="modal"
+                       data-target="#borrarpublicacion-{{idPublicacion}}">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                    {{/if}}
+
+                    <div class="modal fade" id="borrarpublicacion-{{idPublicacion}}" tabindex="-1" role="dialog"
+                         aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Borrar publicacion</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <h6>Está seguro que desea eliminar el publicacion?</h6>
+                                    <h6>Atención: Se desvinculara de cualquier presupuesto al que haya sido
+                                        asociado.</h6>
+                                    <h6>También se desvinculara del ingreso (si corresponde).</h6>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar
+                                    </button>
+                                    <button type="button" class="btn btn-primary"
+                                            onclick="eliminarpublicacion('{{idPublicacion}}');">Borrar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+{{/partial}}
+
+{{#partial "botón-cargar"}}
+    <a class="btn btn-primary mb-sm-3" href="/publicaciones/nuevo" role="button">Cargar publicacion</a>
+    <a class="btn btn-primary mb-sm-3" href="/publicaciones/interes" role="button">Cargar publicacion de interés</a>
+{{/partial}}
+
+{{#partial "rutaListado"}}
+    /publicaciones
+{{/partial}}
+
+{{>listado.hbs nombreEntidad="publicaciones"}}

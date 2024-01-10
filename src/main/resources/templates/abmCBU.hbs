@@ -1,0 +1,46 @@
+{{#partial "contenido"}}
+   
+    <div style="text-align: center; margin-top: 20px;">
+        <h2>ABMCBU MANAGMENT</h2>
+    </div>
+   
+        <div class="container">
+            
+                <div class="col-md-20 login-form-1">
+                    <h3></h3>
+                    <form method="get" action="/ABMCBUAPI/alta">
+                       
+                        <div class="form-group">
+                          
+                            <button   type="submit" class="btn btn-primary btn-lg btn-block">ALTA</button >
+                        </div>
+                        <div class="form-group">
+                        </div>
+                    </form>
+                    
+                      <form method="get" action="/ABMCBUAPI/baja">
+                       
+                        <div class="form-group">
+                           
+                            <button  type="submit" class="btn btn-primary btn-lg btn-block">BAJA</button >
+                        </div>
+                        <div class="form-group">
+                        </div>
+                    </form>
+                    
+                      <form method="get" action="/ABMCBUAPI/modificar">
+                       
+                        <div class="form-group">
+                          
+                            <button  type="submit" class="btn btn-primary btn-lg btn-block">MODIFICAR</button >
+                        </div>
+                        <div class="form-group">
+                        </div>
+                    </form>
+                </div>
+           
+        </div>
+   
+{{/partial}}
+
+{{>layout.hbs}}

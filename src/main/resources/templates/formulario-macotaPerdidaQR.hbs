@@ -1,0 +1,291 @@
+
+<script>
+    var indexcaracteristica = 0{{CaracteristicasLength}};
+    const tipoDocumentosIds = {
+        "FACTURA": "option-factura",
+        "NOTA_DE_DEBITO": "option-notadebito",
+        "NOTA_DE_CREDITO": "option-notacredito",
+        "RECIBO": "option-recibo",
+        "CHEQUE": "option-cheque",
+        "PAGARE": "option-pagare",
+        "ORDEN_DE_COMPRA": "option-ordencompra",
+        "BOLETA_DEPOSITO_BANCARIO": "option-boletadeposito",
+        "REMITO": "option-remito"
+    };
+
+    var newRow = `<tr class="row-caracteristica" id="row-###">
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-2 mr-sm-2">
+                                        <label class="form-check-label" for="caracteristica-nombre-###">Caracteristica</label>
+                                        <select class="form-control" id="caracteristica-nombre-###"
+                        name="caracteristica-nombre-###" {{disabled}}>
+                    {{#caracteristica}}
+                        <option id="caracteristica-nombre-{{@index}}" value="{{this}}">{{this}}</option>
+                    {{/caracteristica}}
+                </select>
+                                    </div>
+                                   
+                                </div>
+                                <div class="row justify-content-end pr-sm-5">
+                                    <button onclick="removeRowcaracteristica('row-###')" id="button-remove-caracteristica" type="button"
+                                            class="btn btn-danger">
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>`;
+
+    var fileAPersistir;
+    var fileURL;
+
+    $(document).ready(function () {
+
+        var tipoComercialSelected = "{{publicacion.documentoComercial.tipo}}";
+        var optionIdToSet = tipoDocumentosIds[tipoComercialSelected];
+        if (optionIdToSet) {
+            document.getElementById(optionIdToSet).selected = true;
+        }
+
+       
+
+        $('#linkAPdf').hide();
+
+       
+
+        $('#datepicker1').datepicker(
+                {
+                    format: 'yyyy-mm-dd',
+                    todayBtn: "linked",
+                    clearBtn: true,
+                    language: "es",
+                    orientation: "bottom auto",
+                    forceParse: false,
+                    autoclose: true,
+                    todayHighlight: true
+                }
+        );
+
+        var debitCard = document.getElementById("debitCard");
+        var creditCard = document.getElementById("creditCard");
+
+        if ("{{publicacion.medioDePago.tipoDeMedioDePago}}" === "DEBIT_CARD") {
+            debitCard.checked = true;
+            creditCard.checked = false;
+        }
+        if ("{{publicacion.medioDePago.tipoDeMedioDePago}}" === "CREDIT_CARD") {
+            debitCard.checked = false;
+            creditCard.checked = true;
+        }
+
+        $("#button-add-caracteristica").on("click", function () {
+            const row = newRow.replaceAll("###", indexcaracteristica);
+            $("tbody").append(row);
+            indexcaracteristica++;
+        });
+
+        $("#archivoDocumentoInput").change(function(event){
+            var file = event.target.files[0],
+            reader = new FileReader();
+
+            reader.onloadend = function () {
+                fileAPersistir = new Blob([file], { type: 'application/pdf' });
+                fileURL = URL.createObjectURL(fileAPersistir);
+                $('#archivoDocumentoInputLabel').html(file.name);
+                $('#linkAPdf').show();
+            };
+            reader.readAsDataURL(file);
+        });
+
+        
+    });
+
+    function openPdf(){
+        window.open(fileURL);
+    }
+
+    function removeRowcaracteristica(idRow) {
+        const row = document.getElementById(idRow);
+        row.remove();
+    }
+
+</script>
+   
+<div>
+    {{#if interes }}
+   <form id="form-publicacion" method="post" action="/guardarpublicacion/{{publicacion.idPublicacion}}">
+    
+        {{else}}
+        <form id="form-publicacion" method="post" action="/guardarpublicacion/interes/{{publicacion.idPublicacion}}">
+   
+    {{/if}}
+
+
+
+        <div>
+            <a class="btn btn-info" href="/publicaciones" role="button">volver</a>
+            <h3 id="cargarpublicacionLabel">{{titulo}} De la Mascota</h3>
+        </div>
+        
+       
+                
+
+            {{#if interes}}
+            <div class="col-sm-12">
+                <label>Mascota(Nombre)</label>
+            </div>
+            
+            <div class="col-sm-12 mb-sm-3">
+                <input class="form-control -validar" name="mascotaNombre"
+                       value="{{mascota.nombre}}" {{disabled}}>
+                     
+            </div>
+            {{/if}}
+            
+            
+
+            <div class="col-sm-12">
+                <label>Especie</label>
+            </div>       
+            
+           <div class="col-sm-12 mb-sm-3">
+                <select class="form-control" id="especie"
+                        name="especie" {{disabled}}>
+                    {{#especie}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/especie}}
+                </select>
+            </div>
+            
+                     
+            <div class="col-sm-12">
+                <label>Sexo</label>
+            </div>       
+            
+           <div class="col-sm-12 mb-sm-3">
+                <select class="form-control" id="sexo"
+                        name="sexo" {{disabled}}>
+                    {{#sexo}}
+                        <option value="{{this}}">{{this}}</option>
+                    {{/sexo}}
+                </select>
+            </div>
+
+            {{#if interes}}
+            <div class="col-sm-12">
+                <label>Estado Mascota</label>
+            </div>      
+             
+            <div class="col-sm-12 mb-sm-3">
+                <select class="form-control" id="estado"
+                        name="estado" {{disabled}}>
+                        <option value="PERDIDA">Perdida</option>
+                        <option value="ENADOPCION">En adopción</option>
+                </select>
+            </div>
+                {{/if}}
+
+             <div class="col-sm-12 mb-sm-3">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">Caracteristicas</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {{#each caracteristicasMascota}}
+                        <tr class="row-caracteritica" id="row-{{@index}}">
+                            <td>
+                                <div class="row">
+                                    <div class="col-sm-2 mr-sm-2">
+                                        <label class="form-check-label" for="caracteristica-nombre-{{@index}}">Tipo</label>
+                                        <select class="form-control" name="caracteristica-nombre-{{@index}}"
+                                                form="form-publicacion" {{disabled}}>
+                                                {{#each caracteristicasMascota}}
+                                            <option id="{{this}}-{{@index}}" value="{{this}}-{{@index}}">Articulo</option>
+                                                {{/each}}
+                                        </select>
+                                    </div>
+                                    
+                                   
+                                   
+                                  
+                                </div>
+                                <div class="row justify-content-end pr-sm-5">
+                                    <button onclick="removeRowcaracteristica('row-{{@index}}')" id="button-remove-caracteristica"
+                                            type="button"
+                                            class="btn btn-danger" {{disabled}}>
+                                        Eliminar
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    {{/each}}
+                    </tbody>
+                </table>
+                <div class="col-sm-12 mb-sm-5">
+                    <button id="button-add-caracteristica" type="button" class="btn btn-success" {{disabled}}>+ caracteristica</button>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+
+            
+           <br>
+            <div class="col-sm-1 mb-sm-5">
+                    <button id="boton-guardar" type="submit" class="btn btn-success"  >Generar Publicacion</button>
+            </div>
+            
+               
+          
+            
+                
+            <div class="col-sm-9 mb-sm-5">
+                <div id="inputs-error" class="alert alert-danger text-left" role="alert" hidden>
+                    ...
+                </div>
+            </div>
+    </form>
+    
+     {{#if finalizar}}
+                    <form id="finalizar" method="post" action="/finalizar/{{publicacion.idPublicacion}}">
+                        <button id="boton-finalizar" type="submit" class="btn btn-danger"  >Finalizar</button>
+                    </form>
+                {{/if}}
+            
+                {{#if contactar}}
+                    <form id="contactar" method="post" action="/contactar/{{publicacion.idPublicacion}}">
+                        <button id="boton-contactar" type="submit" class="btn btn-warning">Contactar</button>
+                    </form>
+                {{/if}}
+
+
+
+
+
+
+
+
+
+
+    <script>
+        $("#form-publicacion").submit(function(e){
+            document.getElementById("inputs-error").hidden = true;
+            e.preventDefault();
+            var form = this;
+            var inputsHtmlCollection = e.target.getElementsByClassName("-validar");
+            var inputsArray = [...inputsHtmlCollection];
+            var inputsInvalidos = inputsArray.filter(field => (field.value.trim() === "" || field.value === undefined));
+            if(inputsInvalidos.length === 0){
+                form.submit();
+            }else {
+                document.getElementById("inputs-error").hidden = false;
+                document.getElementById("inputs-error").innerHTML = "Error en los siguientes campos: " + inputsInvalidos.map(asd => asd.name).join(" / ");
+            }
+        });
+    </script>
+
+</div>

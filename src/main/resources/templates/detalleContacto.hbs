@@ -1,0 +1,25 @@
+{{#partial "contenido"}}
+    <div>
+        <a class="btn btn-info" href="/publicaciones/detalle/{{idPublicacion}}" role="button" >volver</a>
+        <h2 id="detallarPresupuestoLabel">Contacto: </h2>
+        <div class="card w-100">
+            <div class="card-body">
+                <h4 class="card-title">Nombre : {{usuario.persona.nombre}} </h4>
+                
+               
+                {{#each contactos}}
+               
+               
+                <p class="card-text">Emial: {{ email }}   </p>
+                <p class="card-text">Telefono: {{ telefono }}   </p>
+               
+               {{/each}}
+                
+               
+                
+            </div>
+     
+       
+    </div>
+{{/partial}}
+{{>layout.hbs}}

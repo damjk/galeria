@@ -1,0 +1,74 @@
+{{#partial "contenido"}}
+  
+
+
+    <h1>MORTAL KOMBAT</h1>
+
+     <table  class=mi-tabla border="0" align="center">
+        <tr>
+    
+            <td>
+            <a href="#" onclick="ampliarImagen('descarga.png', 'Descripción de la Imagen 1')">
+            <img src="descarga.png" alt="Imagen 1" width="500" height="500">
+            <figcaption>Descripción de la Imagen 1</figcaption>
+           
+             
+             </td>
+               
+                <td>
+     
+            <a href="#" onclick="ampliarImagen('controlPs3Kratos.jpg', 'Descripción de la Imagen 1')">
+            <img src="controlPs3Kratos.jpg" alt="Imagen 1" width="500" height="500">
+            <figcaption>Descripción de la Imagen 1</figcaption>
+     
+             
+             </td>
+            
+        </tr>
+        <tr>
+        	
+            <td>
+             <a href="#" onclick="ampliarImagen('consolas.jpg', 'Descripción de la Imagen 1')">
+            <img src="consolas.jpg" alt="Imagen 1" width="500" height="500">
+             <figcaption>Descripción de la Imagen 1</figcaption>
+            </td>
+            
+            <td><img src="descarga.png" alt="Imagen 1" width="500" height="500"></td>
+            
+        </tr>
+    </table>
+    
+    <table border="0" align="center">
+        <tr>
+            <td><img src="descarga.png" alt="Imagen 1" width="800" height="800"></td>
+            <figcaption>Descripción de la Imagen 1</figcaption>
+            
+        </tr>
+        <tr>
+            <td><img src="descarga.png" alt="Imagen 1" width="800" height="800"></td>
+            
+        </tr>
+    </table>
+    
+    <div class="imagen-ampliada" onclick="cerrarImagen()">
+        <img id="imagenAmpliada" src="" alt="Imagen Ampliada">
+    </div>
+
+    <script>
+        function ampliarImagen(src, descripcion) {
+            var imagenAmpliada = document.getElementById('imagenAmpliada');
+            imagenAmpliada.src = src;
+            imagenAmpliada.alt = descripcion;
+            document.querySelector('.imagen-ampliada').style.display = 'flex';
+        }
+
+        function cerrarImagen() {
+            document.querySelector('.imagen-ampliada').style.display = 'none';
+        }
+    </script>
+
+
+  
+{{/partial}}
+{{>layout.hbs}}
+

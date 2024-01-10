@@ -1,0 +1,36 @@
+{{#partial "contenido"}}
+    <script>
+       
+         $(document).ready(function () {
+            
+           
+            if ({{paginaAnterior}} <= 0) {
+                document.getElementById("boton-pagina-anterior").hidden = true;
+            }
+            if ({{esUltimaPagina}}) {
+                document.getElementById("boton-pagina-siguiente").hidden = true;
+            }
+        });
+    </script>
+    <div class="col-lg-12">
+        <h2>Listado de {{nombreEntidad}}</h2>
+        <div class="form-inline justify-content-between mb-sm-3">
+            {{#block "botón-cargar"}}
+            {{/block}}
+          
+        </div>
+        {{#block "tabla"}}
+        {{/block}}
+        <nav id="botones-paginas">
+            <ul class="pagination pull-right">
+                <li class="page-item">
+                    <a id="boton-pagina-anterior" class="page-link" href="?pagina={{paginaAnterior}}">Anterior</a>
+                </li>
+                <li class="page-item">
+                    <a id="boton-pagina-siguiente" class="page-link" href="?pagina={{paginaSiguiente}}">Siguiente</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+{{/partial}}
+{{>layout.hbs}}
