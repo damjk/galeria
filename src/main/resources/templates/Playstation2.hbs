@@ -1,0 +1,156 @@
+{{#partial "contenido"}}
+  
+<div class="titulo">PLAYSTATION</div>
+<div class=contenido-principal">
+
+   <style>
+    table {
+      width: 100%;
+      
+      margin-top: 20px;
+    }
+
+    table, th, td {
+     
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+
+    #cambiarImagenes {
+      margin-top: 10px;
+      cursor: pointer;
+    }
+    
+    
+  </style>
+</head>
+<body>
+
+  <div class="contenedor">
+
+<table id="tablaImagenes" class=mi-tabla border="0" align="center">
+
+       <tr>
+    
+            <td>
+            <a href="#" onclick="ampliarImagen('Ps1Frente.jpg', 'Descripción de la Imagen 1')">
+            <img id="imagen1" src="Ps1Frente.jpg" loading="lazy" alt="Imagen 1" width="500" height="500">
+            <figcaption>PS1 FAT SCPH-9002 PAL</figcaption>
+           
+             
+             </td>
+               
+                <td>
+     
+            <a href="#" onclick="ampliarImagen('Ps1TapaAbierta.jpg', 'Descripción de la Imagen 1')">
+            <img id="imagen2" src="Ps1TapaAbierta.jpg" loading="lazy" alt="Imagen 1" width="500" height="500">
+            <figcaption>Release 9 de septiembre de 1995</figcaption>
+     
+             
+             </td>
+            
+        </tr>
+       
+       
+       
+       <tr>
+    
+            <td>
+            <a href="#" onclick="ampliarImagen('Ps2SimFrente.jpg', 'Descripción de la Imagen 1')">
+            <img id="imagen3" src="Ps2SimFrente.jpg"  loading="lazy" alt="Imagen 1" width="500" height="500">
+            <figcaption>PS2 Sim SCPH-90001 NTSC</figcaption>
+           
+             
+             </td>
+               
+                <td>
+     
+            <a href="#" onclick="ampliarImagen('Ps2SlimTapaAbierta.jpg', 'Descripción de la Imagen 1')">
+            <img id="imagen4" src="Ps2SlimTapaAbierta.jpg" loading="lazy" alt="Imagen 1" width="500" height="500">
+            <figcaption>Release 25 de noviembre de 2004</figcaption>
+     
+             
+             </td>
+            
+        </tr>
+  
+  
+</table>
+
+<button id="cambiarImagenes" onclick="cambiarImagenes()">Cambiar Imágenes</button>
+</div>
+
+
+
+<script>
+  // Lista de imágenes que se mostrarán en la tabla
+  const imagenes = [
+    'nueva_imagen1.jpg',
+    'nueva_imagen2.jpg',
+    'nueva_imagen3.jpg',
+    'nueva_imagen4.jpg'
+  ];
+
+  let indiceImagen = 0;
+
+  function cambiarImagenes() {
+    // Actualizar el origen de las imágenes en la tabla
+    document.getElementById('imagen1').src = imagenes[indiceImagen];
+    document.getElementById('imagen2').src = imagenes[indiceImagen + 1];
+    document.getElementById('imagen3').src = imagenes[indiceImagen + 2];
+    document.getElementById('imagen4').src = imagenes[indiceImagen + 3];
+
+    // Incrementar el índice para la siguiente serie de imágenes
+    indiceImagen += 4;
+
+    // Reiniciar el índice si alcanza el final de la lista de imágenes
+    if (indiceImagen >= imagenes.length) {
+      indiceImagen = 0;
+    }
+  }
+</script>
+
+    
+      </div>
+    
+   
+    
+    <div class="imagen-ampliada" onclick="cerrarImagen()">
+        <img id="imagenAmpliada" src="" alt="Imagen Ampliada">
+    </div>
+
+   <script>
+    var scrollPosition;
+
+    function ampliarImagen(src, descripcion) {
+        // Guardar la posición actual del scroll
+        scrollPosition = window.scrollY;
+
+        var imagenAmpliada = document.getElementById('imagenAmpliada');
+        imagenAmpliada.src = src;
+        imagenAmpliada.alt = descripcion;
+        document.querySelector('.imagen-ampliada').style.display = 'flex';
+
+        // Deshabilitar el scroll de la página mientras la imagen está ampliada
+        document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarImagen() {
+        // Restaurar la posición del scroll
+        window.scrollTo(0, scrollPosition);
+
+        document.querySelector('.imagen-ampliada').style.display = 'none';
+
+        // Habilitar nuevamente el scroll de la página
+        document.body.style.overflow = 'visible';
+    }
+</script>
+
+
+  
+{{/partial}}
+{{>layout.hbs}}
+
