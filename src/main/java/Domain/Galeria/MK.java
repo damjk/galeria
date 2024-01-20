@@ -45,10 +45,10 @@ public class MK {
 	
 
 
-public class ImagenUtil {
+
 
     // Método para convertir un archivo de imagen en un objeto Blob
-    public static Blob convertirImagenABlob(String rutaArchivo) throws IOException, SQLException {
+    public  Blob convertirImagenABlob(String rutaArchivo) throws IOException, SQLException {
         try (FileInputStream fis = new FileInputStream(new File(rutaArchivo))) {
             // Crea un arreglo de bytes del tamaño del archivo
             byte[] imagenBytes = new byte[(int) new File(rutaArchivo).length()];
@@ -60,7 +60,7 @@ public class ImagenUtil {
             return new javax.sql.rowset.serial.SerialBlob(imagenBytes);
         }
     }
-}
+
 
 
 
