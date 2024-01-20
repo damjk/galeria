@@ -3,23 +3,31 @@ package Domain;
 import Domain.Asociacion.Asociacion;
 import Domain.Asociacion.Calidad;
 import Domain.Asociacion.ConfiguracionAsociacion;
-import Domain.Caracteristica.CaracteristicaMascota;
+
 import Domain.Contacto.Contacto;
-import Domain.Controller.ControllerUtils;
-import Domain.Controller.PublicacionController;
+
 import Domain.DTOs.PublicacionTemplateDTO;
 import Domain.Direccion.Direccion;
+import Domain.Galeria.DarkSoul;
+import Domain.Galeria.GOD;
+import Domain.Galeria.Galeria;
+import Domain.Galeria.Galeria.ImagenUtil;
+import Domain.Galeria.MK;
 import Domain.Mascota.Especie;
 import Domain.Mascota.Foto;
 import Domain.Mascota.Mascota;
 import Domain.Mascota.Sexo;
-import Domain.Publicacion.Publicacion;
+
 import Domain.Publicacion.PublicacionMascotaEnAdopcion;
 import Domain.Publicacion.PublicacionMascotaPerdida;
 import Domain.Publicacion.PublicacionTemplate;
 import Domain.Usuario.Persona;
 import Domain.Usuario.TipoDocumento;
 import Domain.Usuario.Usuario;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.Base64;
+import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +51,7 @@ public class Repositorio<T> {
     public static List<Usuario> usuarios =  new ArrayList<>();
     public static List<PublicacionTemplate>  publicaciones = new ArrayList<>();
     public static List<Mascota> mascotas = new ArrayList<>();
+    public List<Galeria> galeria = new ArrayList<>();
 
     public static final EntityManager ENTITY_MANAGER;
 	
@@ -57,7 +66,7 @@ public class Repositorio<T> {
         }
         String persistenceUnit = System.getenv("PERSISTENCE_UNIT");
         if (Objects.isNull(persistenceUnit)) {
-            persistenceUnit = "prod";
+            persistenceUnit = "mysql";
         }
         ENTITY_MANAGER = Persistence.createEntityManagerFactory(persistenceUnit).createEntityManager();
     }
@@ -76,8 +85,20 @@ public class Repositorio<T> {
             throw new RuntimeException("Error al persistir: ", e);
         }
     }
+    
+    public static void guardar2(Object  galeria2) {
+        try {
+            ENTITY_MANAGER.getTransaction().begin();
+            ENTITY_MANAGER.merge(galeria2);
+            ENTITY_MANAGER.getTransaction().commit();
+        } catch (Exception e) {
+            ENTITY_MANAGER.getTransaction().rollback();
+            throw new RuntimeException("Error al persistir: ", e);
+        }
+    }
 
     public static List<PublicacionTemplateDTO> publicacionTemplateDTOs = new ArrayList<>();
+	
 
     
     public static  List<Usuario> Usuarios()
@@ -107,6 +128,330 @@ public class Repositorio<T> {
         this.asociaciones.add(gatitos);
         this.asociaciones.add(perritos);
     }
+    
+    
+    public void setGaleria() throws IOException, SQLException
+    {
+    	 String ruta = "src\\main\\resources\\public\\UMK3.jpg";
+         String ruta2 = "src\\main\\resources\\public\\trilogy.jpg";
+         String ruta3 = "src\\main\\resources\\public\\MKPS2.jpg";
+         String ruta4 = "src\\main\\resources\\public\\Armagedon.jpg";
+         String ruta5 = "src\\main\\resources\\public\\deception.jpg";
+         String ruta6 = "src\\main\\resources\\public\\deception2.jpg";
+         String ruta7 = "src\\main\\resources\\public\\deception3.jpg";
+         String ruta8 = "src\\main\\resources\\public\\shaolinmonks.jpg";
+         String ruta9 = "src\\main\\resources\\public\\mkpack.jpg";
+         String ruta10 = "src\\main\\resources\\public\\MK9.jpg";
+         String ruta11 = "src\\main\\resources\\public\\MKVSDC.jpg";
+         String ruta12 = "src\\main\\resources\\public\\MKXL.jpg";
+         String ruta13 = "src\\main\\resources\\public\\packtilogy.jpg";
+         String ruta14 = "src\\main\\resources\\public\\umksega.jpg";
+         
+         String rds1 = "src\\main\\resources\\public\\ds1.jpg";
+         String rds2 = "src\\main\\resources\\public\\bloodborne.jpg";
+         String rds3 = "src\\main\\resources\\public\\ds3.jpg";
+         String rds4 = "src\\main\\resources\\public\\sekiro.jpg";
+         String rds5 = "src\\main\\resources\\public\\demonsoul.jpg";
+         String rds6 = "src\\main\\resources\\public\\eldenring.jpg";
+         String rds7 = "src\\main\\resources\\public\\dstrilogy2.jpg";
+         String rds8 = "src\\main\\resources\\public\\dstrilogy.jpg";
+       
+
+    	 String rgod = "src\\main\\resources\\public\\2.jpg";
+         String rgod2 = "src\\main\\resources\\public\\3.jpg";
+         String rgod3 = "src\\main\\resources\\public\\4.jpg";
+         String rgod4 = "src\\main\\resources\\public\\5.jpg";
+         String rgod5 = "src\\main\\resources\\public\\6.jpg";
+         String rgod6 = "src\\main\\resources\\public\\7.jpg";
+         String rgod7 = "src\\main\\resources\\public\\8.jpg";
+         String rgod8 = "src\\main\\resources\\public\\9.jpg";
+         String rgod9 = "src\\main\\resources\\public\\10.jpg";
+         String rgod10 = "src\\main\\resources\\public\\11.jpg";
+         String rgod11 = "src\\main\\resources\\public\\12.jpg";
+         String rgod12 = "src\\main\\resources\\public\\13.jpg";
+         String rgod13 = "src\\main\\resources\\public\\14.jpg";
+         String rgod14 = "src\\main\\resources\\public\\15.jpg";
+    	 String rgod15 = "src\\main\\resources\\public\\16.jpg";
+         String rgod16 = "src\\main\\resources\\public\\17.jpg";
+         String rgod17 = "src\\main\\resources\\public\\18.jpg";
+         String rgod18 = "src\\main\\resources\\public\\19.jpg";
+         String rgod19 = "src\\main\\resources\\public\\20.jpg";
+         String rgod20 = "src\\main\\resources\\public\\21.jpg";
+         String rgod21 = "src\\main\\resources\\public\\22.jpg";
+         String rgod22 = "src\\main\\resources\\public\\23.jpg";
+         String rgod23 = "src\\main\\resources\\public\\controlPs3Kratos.jpg";
+         String rgod24 = "src\\main\\resources\\public\\26.jpg";
+         String rgod25 = "src\\main\\resources\\public\\27.jpg";
+         String rgod26 = "src\\main\\resources\\public\\28.jpg";
+         String rgod27 = "src\\main\\resources\\public\\29.jpg";
+         String rgod28 = "src\\main\\resources\\public\\30.jpg";
+         
+     
+        
+         MK mk = new MK();
+         MK mk2 = new MK();
+         MK mk3 = new MK();
+         MK mk4 = new MK();
+         MK mk5 = new MK();
+         MK mk6 = new MK();
+         MK mk7 = new MK();
+         MK mk8 = new MK();
+         MK mk9 = new MK();
+         MK mk10 = new MK();
+         MK mk11 = new MK();
+         MK mk12 = new MK();
+         MK mk13 = new MK();
+         MK mk14 = new MK();
+         
+         DarkSoul ds = new DarkSoul();
+         DarkSoul ds2 = new DarkSoul();
+         DarkSoul ds3 = new DarkSoul();
+         DarkSoul ds4 = new DarkSoul();
+         DarkSoul ds5 = new DarkSoul();
+         DarkSoul ds6 = new DarkSoul();
+         DarkSoul ds7 = new DarkSoul();
+         DarkSoul ds8 = new DarkSoul();
+         
+         GOD god = new GOD();
+         GOD god2 = new GOD();
+         GOD god3= new GOD();
+         GOD god4 = new GOD();
+         GOD god5 = new GOD();
+         GOD god6 = new GOD();
+         GOD god7 = new GOD();
+         GOD god8 = new GOD();
+         GOD god9 = new GOD();
+         GOD god10 = new GOD();
+         GOD god11 = new GOD();
+         GOD god12 = new GOD();
+         GOD god13 = new GOD();
+         GOD god14 = new GOD();
+         GOD god15 = new GOD();
+         GOD god16 = new GOD();
+         GOD god17 = new GOD();
+         GOD god18 = new GOD();
+         GOD god19 = new GOD();
+         GOD god20 = new GOD();
+         GOD god21 = new GOD();
+         GOD god22 = new GOD();
+         GOD god23 = new GOD();
+         GOD god24 = new GOD();
+         GOD god25 = new GOD();
+         GOD god26 = new GOD();
+         GOD god27 = new GOD();
+         GOD god28 = new GOD();
+       
+         
+         mk.setNombre("ULTIMATE MORTALAL KOMBAT 3 - SEGA");
+         mk2.setNombre("MORTAL KOMBAT TRILOGY - PS1");
+         mk3.setNombre("MORTAL KOMBAT PACK3");
+         mk4.setNombre("MORTAL KOMBAT ARMAGEDDON - PS2");
+         mk5.setNombre("MORTAL KOMBAT DECEPTION - PS2");
+         mk6.setNombre("MORTAL KOMBAT PREMIUM PACK - PS2");
+         mk7.setNombre("MORTAL KOMBAT PREMIUM PACK - BOX");
+         mk8.setNombre("MORTAL KOMBAT SHAOIN MONKS");
+         mk9.setNombre("PACK");
+         mk10.setNombre("MORTAL KOMBAT 9 - PS3");
+         mk11.setNombre("MORTAL KOMBAT VS DC UNIVERSE - PS3");
+         mk12.setNombre("MORTAL KOMBAT XL - PS4");
+         mk13.setNombre("MORTAL KOMBAT COLLECTION - PS2");
+         mk14.setNombre("ULTIMATE MORTAL KOMBAT 3 - SEGA");
+         
+         ds.setNombre("DARKSOULS - PS3");
+         ds2.setNombre("BLOODBORNE - PS4");
+         ds3.setNombre("DARKSOULS 3 COMPLETE EDITION - PS4");
+         ds4.setNombre("SEKIRO™: SHADOWS DIE TWICE - PS4");
+         ds5.setNombre("DEMON SOULS - PS5");
+         ds6.setNombre("ELDEN RING - PS5");
+         ds7.setNombre("DARKSOULS TRILOGY - PS4");
+         ds8.setNombre("DARKSOULS TRILOGY - PS4");
+        
+         
+        
+         Blob mkBlob = ImagenUtil.convertirImagenABlob(ruta);
+         Blob mkBlob2 = ImagenUtil.convertirImagenABlob(ruta2);
+         Blob mkBlob3 = ImagenUtil.convertirImagenABlob(ruta3);
+         Blob mkBlob4 = ImagenUtil.convertirImagenABlob(ruta4);
+         Blob mkBlob5 = ImagenUtil.convertirImagenABlob(ruta5);
+         Blob mkBlob6 = ImagenUtil.convertirImagenABlob(ruta6);
+         Blob mkBlob7 = ImagenUtil.convertirImagenABlob(ruta7);
+         Blob mkBlob8 = ImagenUtil.convertirImagenABlob(ruta8);
+         Blob mkBlob9 = ImagenUtil.convertirImagenABlob(ruta9);
+         Blob mkBlob10 = ImagenUtil.convertirImagenABlob(ruta10);
+         Blob mkBlob11 = ImagenUtil.convertirImagenABlob(ruta11);
+         Blob mkBlob12 = ImagenUtil.convertirImagenABlob(ruta12);
+         Blob mkBlob13 = ImagenUtil.convertirImagenABlob(ruta13);
+         Blob mkBlob14 = ImagenUtil.convertirImagenABlob(ruta14);
+         
+         Blob dsBlob = ImagenUtil.convertirImagenABlob(rds1);
+         Blob dsBlob2 = ImagenUtil.convertirImagenABlob(rds2);
+         Blob dsBlob3 = ImagenUtil.convertirImagenABlob(rds3);
+         Blob dsBlob4 = ImagenUtil.convertirImagenABlob(rds4);
+         Blob dsBlob5 = ImagenUtil.convertirImagenABlob(rds5);
+         Blob dsBlob6 = ImagenUtil.convertirImagenABlob(rds6);
+         Blob dsBlob7 = ImagenUtil.convertirImagenABlob(rds7);
+         Blob dsBlob8 = ImagenUtil.convertirImagenABlob(rds8);
+         
+         Blob godBlob = ImagenUtil.convertirImagenABlob(rgod);
+         Blob godBlob2 = ImagenUtil.convertirImagenABlob(rgod2);
+         Blob godBlob3 = ImagenUtil.convertirImagenABlob(rgod3);
+         Blob godBlob4 = ImagenUtil.convertirImagenABlob(rgod4);
+         Blob godBlob5 = ImagenUtil.convertirImagenABlob(rgod5);
+         Blob godBlob6 = ImagenUtil.convertirImagenABlob(rgod6);
+         Blob godBlob7 = ImagenUtil.convertirImagenABlob(rgod7);
+         Blob godBlob8 = ImagenUtil.convertirImagenABlob(rgod8);
+         Blob godBlob9 = ImagenUtil.convertirImagenABlob(rgod9);
+         Blob godBlob10 = ImagenUtil.convertirImagenABlob(rgod10);
+         Blob godBlob11 = ImagenUtil.convertirImagenABlob(rgod11);
+         Blob godBlob12 = ImagenUtil.convertirImagenABlob(rgod12);
+         Blob godBlob13 = ImagenUtil.convertirImagenABlob(rgod13);
+         Blob godBlob14 = ImagenUtil.convertirImagenABlob(rgod14);
+         Blob godBlob15 = ImagenUtil.convertirImagenABlob(rgod15);
+         Blob godBlob16 = ImagenUtil.convertirImagenABlob(rgod16);
+         Blob godBlob17 = ImagenUtil.convertirImagenABlob(rgod17);
+         Blob godBlob18 = ImagenUtil.convertirImagenABlob(rgod18);
+         Blob godBlob19 = ImagenUtil.convertirImagenABlob(rgod19);
+         Blob godBlob20 = ImagenUtil.convertirImagenABlob(rgod20);
+         Blob godBlob21 = ImagenUtil.convertirImagenABlob(rgod21);
+         Blob godBlob22 = ImagenUtil.convertirImagenABlob(rgod22);
+         Blob godBlob23 = ImagenUtil.convertirImagenABlob(rgod23);
+         Blob godBlob24 = ImagenUtil.convertirImagenABlob(rgod24);
+         Blob godBlob25 = ImagenUtil.convertirImagenABlob(rgod25);
+         Blob godBlob26 = ImagenUtil.convertirImagenABlob(rgod26);
+         Blob godBlob27 = ImagenUtil.convertirImagenABlob(rgod27);
+         Blob godBlob28 = ImagenUtil.convertirImagenABlob(rgod28);
+        
+    
+         
+         mk.setImagen(mkBlob);
+         mk2.setImagen(mkBlob2);
+         mk3.setImagen(mkBlob3);
+         mk4.setImagen(mkBlob4);
+         mk5.setImagen(mkBlob5);
+         mk6.setImagen(mkBlob6);
+         mk7.setImagen(mkBlob7);
+         mk8.setImagen(mkBlob8);
+         mk9.setImagen(mkBlob9);
+         mk10.setImagen(mkBlob10);
+         mk11.setImagen(mkBlob11);
+         mk12.setImagen(mkBlob12);
+         mk13.setImagen(mkBlob13);
+         mk14.setImagen(mkBlob14);
+         
+         ds.setImagen(dsBlob);
+         ds2.setImagen(dsBlob2);
+         ds3.setImagen(dsBlob3);
+         ds4.setImagen(dsBlob4);
+         ds5.setImagen(dsBlob5);
+         ds6.setImagen(dsBlob6);
+         ds7.setImagen(dsBlob7);
+         ds8.setImagen(dsBlob8);
+         
+         god.setImagen(godBlob);
+         god2.setImagen(godBlob2);
+         god3.setImagen(godBlob3);
+         god4.setImagen(godBlob4);
+         god5.setImagen(godBlob5);
+         god6.setImagen(godBlob6);
+         god7.setImagen(godBlob7);
+         god8.setImagen(godBlob8);
+         god9.setImagen(godBlob9);
+         god10.setImagen(godBlob10);
+         god11.setImagen(godBlob11);
+         god12.setImagen(godBlob12);
+         god13.setImagen(godBlob13);
+         god14.setImagen(godBlob14);
+         god15.setImagen(godBlob15);
+         god16.setImagen(godBlob16);
+         god17.setImagen(godBlob17);
+         god18.setImagen(godBlob18);
+         god19.setImagen(godBlob19);
+         god20.setImagen(godBlob20);
+         god21.setImagen(godBlob21);
+         god22.setImagen(godBlob22);
+         god23.setImagen(godBlob23);
+         god24.setImagen(godBlob24);
+         god25.setImagen(godBlob25);
+         god26.setImagen(godBlob26);
+         god27.setImagen(godBlob27);
+         god28.setImagen(godBlob28);
+       
+        Galeria galeria = new Galeria();
+       
+        
+        List<MK> mkes = new ArrayList<>();
+        List<DarkSoul> dses = new ArrayList<>();
+        List<GOD> godes = new ArrayList<>();
+     
+        mkes.add(mk);
+        mkes.add(mk2);
+        mkes.add(mk3);
+        mkes.add(mk4);
+        mkes.add(mk5);
+        mkes.add(mk6);
+        mkes.add(mk7);
+        mkes.add(mk8);
+        mkes.add(mk9);
+        mkes.add(mk10);
+        mkes.add(mk11);
+        mkes.add(mk12);
+        mkes.add(mk13);
+        mkes.add(mk14);
+        
+        dses.add(ds);
+        dses.add(ds2);
+        dses.add(ds3);
+        dses.add(ds4);
+        dses.add(ds5);
+        dses.add(ds6);
+        dses.add(ds7);
+        dses.add(ds8);
+        
+        godes.add(god);
+        godes.add(god2);
+        godes.add(god3);
+        godes.add(god4);
+        godes.add(god5);
+        godes.add(god6);
+        godes.add(god7);
+        godes.add(god8);
+        godes.add(god9);
+        godes.add(god10);
+        godes.add(god11);
+        godes.add(god12);
+        godes.add(god13);
+        godes.add(god14);
+        godes.add(god15);
+        godes.add(god16);
+        godes.add(god17);
+        godes.add(god18);
+        godes.add(god19);
+        godes.add(god20);
+        godes.add(god21);
+        godes.add(god22);
+        godes.add(god23);
+        godes.add(god24);
+        godes.add(god25);
+        godes.add(god26);
+        godes.add(god27);
+        godes.add(god28);
+     
+        
+        galeria.setImagenes(mkes);
+        galeria.setImagenes2(dses);
+        galeria.setImagenes3(godes);
+        this.galeria.add(galeria);
+        
+    }
+    
+    public static String convertBlobToBase64(Blob blob) throws SQLException {
+        // Paso 1: Leer los bytes del Blob
+        byte[] blobBytes = blob.getBytes(1, (int) blob.length());
+
+        // Paso 2: Convertir a Base64
+        return Base64.getEncoder().encodeToString(blobBytes);
+    }
+
 
     public void setConfiguraciones()
     {
@@ -237,7 +582,7 @@ public class Repositorio<T> {
         return publicaciones;
     }
     
-    protected List<T> obtenerTodos() {
+    public List<T> obtenerTodos() {
         return allQuery().getResultList();
     }
     

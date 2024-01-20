@@ -2,6 +2,8 @@ package Domain.Controller;
 
 
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -298,11 +300,18 @@ public class PublicacionController {
 		return new ModelAndView(model, "publicacionInteres.hbs");
 	}
 
-	 public static ModelAndView guardarPublicacion(final Request request, final Response response) {
+	 public static ModelAndView guardarPublicacion(final Request request, final Response response) throws IOException, SQLException {
 	        final Asociacion asociacion = ControllerUtils.obtenerAsosiacion(request);
 	        final PublicacionTemplate publicacion = construirPublicacion(request);	        
 	        //agregarOActualizarpublicacion(publicacion,request);	   
+	        Repositorio repositorio= new RepositorioPublicacion();
+	        repositorio.setGaleria();
+	        
+	        List<Galeria> blobList = new ArrayList<>(repositorio.galeria);
+	        Repositorio.guardar2(blobList.get(0));
+	        
 	        Repositorio.guardar(publicacion);
+	        
 	        //REPOSITORIO_ORGANIZACIONES.guardar(organizacion);	        			
 	        response.redirect("/publicaciones");
 	        // TODO: esto está bien? creo que debería retornar algo

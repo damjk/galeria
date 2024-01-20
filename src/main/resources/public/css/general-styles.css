@@ -112,6 +112,19 @@ h4 {
     margin: 0; /* Elimina el margen predeterminado */
 }
 
+ /* Estilos CSS para el botón */
+        .bonton1 {
+            
+            text-align: center;
+          
+        }
+        
+         .bonton2 {
+            
+            text-align: center;
+          
+        }
+
 
 .contenedor {
     display: flex;

@@ -77,9 +77,12 @@ public final class Router {
          get("/mortalkombat", Galeria::Mortalkombat, CUSTOM_HANDLEBARS_TEMPLATE_ENGINE);
          get("/godofwar", Galeria::Godofwar, CUSTOM_HANDLEBARS_TEMPLATE_ENGINE);
          get("/playstation", Galeria::Playstation, CUSTOM_HANDLEBARS_TEMPLATE_ENGINE);
+         get("/playstation2", Galeria::Playstation2, CUSTOM_HANDLEBARS_TEMPLATE_ENGINE);
+         get("/darksouls", Galeria::DarkSouls, CUSTOM_HANDLEBARS_TEMPLATE_ENGINE);
          get("/ps3", Galeria::Ps3, CUSTOM_HANDLEBARS_TEMPLATE_ENGINE);
          get("/ps4", Galeria::Ps4, CUSTOM_HANDLEBARS_TEMPLATE_ENGINE);
          get("/accesorios", Galeria::Accesorios, CUSTOM_HANDLEBARS_TEMPLATE_ENGINE);
+         get("/menu", Galeria::MenuGaleria, CUSTOM_HANDLEBARS_TEMPLATE_ENGINE);
          
          
     }

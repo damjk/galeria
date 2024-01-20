@@ -1,6 +1,6 @@
 {{#partial "contenido"}}
   
-<div class="titulo">PLAYSTATION</div>
+<div class="titulo">GOD OF WAR</div>
 <div class=contenido-principal">
 
    <style>
@@ -47,24 +47,13 @@
 <div id="mi-contenedor"></div>
 
 <script>
-    // Datos
-    var fotos = [
-        { nombre: '{{foto1.nombre}}', imagen: '{{foto1.imagen}}' },
-         { nombre: '{{foto2.nombre}}', imagen: '{{foto2.imagen}}' },
-         { nombre: '{{foto3.nombre}}', imagen: '{{foto3.imagen}}' },
-       { nombre: '{{foto4.nombre}}', imagen: '{{foto4.imagen}}' },
-       
-        { nombre: '{{foto5.nombre}}', imagen: '{{foto5.imagen}}' },
-        
-         { nombre: '{{foto6.nombre}}', imagen: '{{foto6.imagen}}' },
-         
-          { nombre: '{{foto7.nombre}}', imagen: '{{foto7.imagen}}' },
-          
-           { nombre: '{{foto8.nombre}}', imagen: '{{foto8.imagen}}' },
-            { nombre: '{{foto9.nombre}}', imagen: '{{foto9.imagen}}' }
-        // ... tus datos ...
-    ];
+var fotos = [];
 
+{{#each fotos}}
+    var nombre = '{{this.nombre}}';
+    var imagen = '{{this.imagen}}';
+    fotos.push({ nombre: nombre, imagen: imagen });
+{{/each}}
 
     // Inicializa el índice de la tanda actual
     var currentTandaIndex = 0;
@@ -156,7 +145,7 @@
         <img id="imagenAmpliada" src="" alt="Imagen Ampliada">
     </div>
 
-   <script>
+<script>
     var scrollPosition;
 
     function ampliarImagen(src, descripcion) {
@@ -166,24 +155,44 @@
         var imagenAmpliada = document.getElementById('imagenAmpliada');
         imagenAmpliada.src = src;
         imagenAmpliada.alt = descripcion;
-        document.querySelector('.imagen-ampliada').style.display = 'flex';
 
-        // Deshabilitar el scroll de la página mientras la imagen está ampliada
-        document.body.style.overflow = 'hidden';
+        // Verificar si la imagen es vertical
+        var img = new Image();
+        img.src = src;
+        img.onload = function() {
+            var esVertical = img.height > img.width;
+
+            // Establecer un ancho máximo solo si la imagen es vertical
+            if (esVertical) {
+                var anchoMaximo = window.innerWidth * 0.4; // Por ejemplo, el 80% del ancho de la ventana
+                imagenAmpliada.style.maxWidth = anchoMaximo + 'px';
+            } else {
+                // Restaurar el ancho máximo si la imagen es horizontal
+               
+            }
+
+            // Mostrar la imagen ampliada
+            document.querySelector('.imagen-ampliada').style.display = 'flex';
+
+            // Deshabilitar el scroll de la página mientras la imagen está ampliada
+            document.body.style.overflow = 'hidden';
+        };
     }
 
     function cerrarImagen() {
         // Restaurar la posición del scroll
         window.scrollTo(0, scrollPosition);
 
+        var imagenAmpliada = document.getElementById('imagenAmpliada');
+        imagenAmpliada.style.maxWidth = 'none';
+
+        // Ocultar la imagen ampliada
         document.querySelector('.imagen-ampliada').style.display = 'none';
 
         // Habilitar nuevamente el scroll de la página
         document.body.style.overflow = 'visible';
     }
 </script>
-
-
   
 {{/partial}}
 {{>layout.hbs}}
