@@ -11,7 +11,6 @@ import Domain.Direccion.Direccion;
 import Domain.Galeria.DarkSoul;
 import Domain.Galeria.GOD;
 import Domain.Galeria.Galeria;
-import Domain.Galeria.Galeria.ImagenUtil;
 import Domain.Galeria.MK;
 import Domain.Mascota.Especie;
 import Domain.Mascota.Foto;
@@ -66,7 +65,7 @@ public class Repositorio<T> {
         }
         String persistenceUnit = System.getenv("PERSISTENCE_UNIT");
         if (Objects.isNull(persistenceUnit)) {
-            persistenceUnit = "mysql";
+            persistenceUnit = "prod";
         }
         ENTITY_MANAGER = Persistence.createEntityManagerFactory(persistenceUnit).createEntityManager();
     }
@@ -267,59 +266,60 @@ public class Repositorio<T> {
          ds8.setNombre("DARKSOULS TRILOGY - PS4");
         
          
+         Galeria galeria = new Galeria();
         
-         Blob mkBlob = ImagenUtil.convertirImagenABlob(ruta);
-         Blob mkBlob2 = ImagenUtil.convertirImagenABlob(ruta2);
-         Blob mkBlob3 = ImagenUtil.convertirImagenABlob(ruta3);
-         Blob mkBlob4 = ImagenUtil.convertirImagenABlob(ruta4);
-         Blob mkBlob5 = ImagenUtil.convertirImagenABlob(ruta5);
-         Blob mkBlob6 = ImagenUtil.convertirImagenABlob(ruta6);
-         Blob mkBlob7 = ImagenUtil.convertirImagenABlob(ruta7);
-         Blob mkBlob8 = ImagenUtil.convertirImagenABlob(ruta8);
-         Blob mkBlob9 = ImagenUtil.convertirImagenABlob(ruta9);
-         Blob mkBlob10 = ImagenUtil.convertirImagenABlob(ruta10);
-         Blob mkBlob11 = ImagenUtil.convertirImagenABlob(ruta11);
-         Blob mkBlob12 = ImagenUtil.convertirImagenABlob(ruta12);
-         Blob mkBlob13 = ImagenUtil.convertirImagenABlob(ruta13);
-         Blob mkBlob14 = ImagenUtil.convertirImagenABlob(ruta14);
+         Blob mkBlob = galeria.convertirImagenABlob(ruta);
+         Blob mkBlob2 = galeria.convertirImagenABlob(ruta2);
+         Blob mkBlob3 = galeria.convertirImagenABlob(ruta3);
+         Blob mkBlob4 = galeria.convertirImagenABlob(ruta4);
+         Blob mkBlob5 = galeria.convertirImagenABlob(ruta5);
+         Blob mkBlob6 = galeria.convertirImagenABlob(ruta6);
+         Blob mkBlob7 = galeria.convertirImagenABlob(ruta7);
+         Blob mkBlob8 = galeria.convertirImagenABlob(ruta8);
+         Blob mkBlob9 = galeria.convertirImagenABlob(ruta9);
+         Blob mkBlob10 = galeria.convertirImagenABlob(ruta10);
+         Blob mkBlob11 = galeria.convertirImagenABlob(ruta11);
+         Blob mkBlob12 = galeria.convertirImagenABlob(ruta12);
+         Blob mkBlob13 = galeria.convertirImagenABlob(ruta13);
+         Blob mkBlob14 = galeria.convertirImagenABlob(ruta14);
          
-         Blob dsBlob = ImagenUtil.convertirImagenABlob(rds1);
-         Blob dsBlob2 = ImagenUtil.convertirImagenABlob(rds2);
-         Blob dsBlob3 = ImagenUtil.convertirImagenABlob(rds3);
-         Blob dsBlob4 = ImagenUtil.convertirImagenABlob(rds4);
-         Blob dsBlob5 = ImagenUtil.convertirImagenABlob(rds5);
-         Blob dsBlob6 = ImagenUtil.convertirImagenABlob(rds6);
-         Blob dsBlob7 = ImagenUtil.convertirImagenABlob(rds7);
-         Blob dsBlob8 = ImagenUtil.convertirImagenABlob(rds8);
+         Blob dsBlob = galeria.convertirImagenABlob(rds1);
+         Blob dsBlob2 = galeria.convertirImagenABlob(rds2);
+         Blob dsBlob3 = galeria.convertirImagenABlob(rds3);
+         Blob dsBlob4 = galeria.convertirImagenABlob(rds4);
+         Blob dsBlob5 = galeria.convertirImagenABlob(rds5);
+         Blob dsBlob6 = galeria.convertirImagenABlob(rds6);
+         Blob dsBlob7 = galeria.convertirImagenABlob(rds7);
+         Blob dsBlob8 = galeria.convertirImagenABlob(rds8);
          
-         Blob godBlob = ImagenUtil.convertirImagenABlob(rgod);
-         Blob godBlob2 = ImagenUtil.convertirImagenABlob(rgod2);
-         Blob godBlob3 = ImagenUtil.convertirImagenABlob(rgod3);
-         Blob godBlob4 = ImagenUtil.convertirImagenABlob(rgod4);
-         Blob godBlob5 = ImagenUtil.convertirImagenABlob(rgod5);
-         Blob godBlob6 = ImagenUtil.convertirImagenABlob(rgod6);
-         Blob godBlob7 = ImagenUtil.convertirImagenABlob(rgod7);
-         Blob godBlob8 = ImagenUtil.convertirImagenABlob(rgod8);
-         Blob godBlob9 = ImagenUtil.convertirImagenABlob(rgod9);
-         Blob godBlob10 = ImagenUtil.convertirImagenABlob(rgod10);
-         Blob godBlob11 = ImagenUtil.convertirImagenABlob(rgod11);
-         Blob godBlob12 = ImagenUtil.convertirImagenABlob(rgod12);
-         Blob godBlob13 = ImagenUtil.convertirImagenABlob(rgod13);
-         Blob godBlob14 = ImagenUtil.convertirImagenABlob(rgod14);
-         Blob godBlob15 = ImagenUtil.convertirImagenABlob(rgod15);
-         Blob godBlob16 = ImagenUtil.convertirImagenABlob(rgod16);
-         Blob godBlob17 = ImagenUtil.convertirImagenABlob(rgod17);
-         Blob godBlob18 = ImagenUtil.convertirImagenABlob(rgod18);
-         Blob godBlob19 = ImagenUtil.convertirImagenABlob(rgod19);
-         Blob godBlob20 = ImagenUtil.convertirImagenABlob(rgod20);
-         Blob godBlob21 = ImagenUtil.convertirImagenABlob(rgod21);
-         Blob godBlob22 = ImagenUtil.convertirImagenABlob(rgod22);
-         Blob godBlob23 = ImagenUtil.convertirImagenABlob(rgod23);
-         Blob godBlob24 = ImagenUtil.convertirImagenABlob(rgod24);
-         Blob godBlob25 = ImagenUtil.convertirImagenABlob(rgod25);
-         Blob godBlob26 = ImagenUtil.convertirImagenABlob(rgod26);
-         Blob godBlob27 = ImagenUtil.convertirImagenABlob(rgod27);
-         Blob godBlob28 = ImagenUtil.convertirImagenABlob(rgod28);
+         Blob godBlob = galeria.convertirImagenABlob(rgod);
+         Blob godBlob2 = galeria.convertirImagenABlob(rgod2);
+         Blob godBlob3 = galeria.convertirImagenABlob(rgod3);
+         Blob godBlob4 = galeria.convertirImagenABlob(rgod4);
+         Blob godBlob5 = galeria.convertirImagenABlob(rgod5);
+         Blob godBlob6 = galeria.convertirImagenABlob(rgod6);
+         Blob godBlob7 = galeria.convertirImagenABlob(rgod7);
+         Blob godBlob8 = galeria.convertirImagenABlob(rgod8);
+         Blob godBlob9 = galeria.convertirImagenABlob(rgod9);
+         Blob godBlob10 = galeria.convertirImagenABlob(rgod10);
+         Blob godBlob11 = galeria.convertirImagenABlob(rgod11);
+         Blob godBlob12 = galeria.convertirImagenABlob(rgod12);
+         Blob godBlob13 = galeria.convertirImagenABlob(rgod13);
+         Blob godBlob14 = galeria.convertirImagenABlob(rgod14);
+         Blob godBlob15 = galeria.convertirImagenABlob(rgod15);
+         Blob godBlob16 = galeria.convertirImagenABlob(rgod16);
+         Blob godBlob17 = galeria.convertirImagenABlob(rgod17);
+         Blob godBlob18 = galeria.convertirImagenABlob(rgod18);
+         Blob godBlob19 = galeria.convertirImagenABlob(rgod19);
+         Blob godBlob20 = galeria.convertirImagenABlob(rgod20);
+         Blob godBlob21 = galeria.convertirImagenABlob(rgod21);
+         Blob godBlob22 = galeria.convertirImagenABlob(rgod22);
+         Blob godBlob23 = galeria.convertirImagenABlob(rgod23);
+         Blob godBlob24 = galeria.convertirImagenABlob(rgod24);
+         Blob godBlob25 = galeria.convertirImagenABlob(rgod25);
+         Blob godBlob26 = galeria.convertirImagenABlob(rgod26);
+         Blob godBlob27 = galeria.convertirImagenABlob(rgod27);
+         Blob godBlob28 = galeria.convertirImagenABlob(rgod28);
         
     
          
@@ -376,7 +376,7 @@ public class Repositorio<T> {
          god27.setImagen(godBlob27);
          god28.setImagen(godBlob28);
        
-        Galeria galeria = new Galeria();
+    
        
         
         List<MK> mkes = new ArrayList<>();

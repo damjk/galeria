@@ -32,7 +32,7 @@
 <property name="hibernate.show_sql" value="true"/>
 <property name="hibernate.format_sql" value="false"/>
 <property name="use_sql_comments" value="false"/>
-<property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+<property name="hibernate.hbm2ddl.auto" value="update"/>
 </properties>
 </persistence-unit>
     <persistence-unit name="dds1" transaction-type="RESOURCE_LOCAL">
