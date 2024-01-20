@@ -65,7 +65,7 @@ public class Repositorio<T> {
         }
         String persistenceUnit = System.getenv("PERSISTENCE_UNIT");
         if (Objects.isNull(persistenceUnit)) {
-            persistenceUnit = "prod";
+            persistenceUnit = "mysql";
         }
         ENTITY_MANAGER = Persistence.createEntityManagerFactory(persistenceUnit).createEntityManager();
     }
