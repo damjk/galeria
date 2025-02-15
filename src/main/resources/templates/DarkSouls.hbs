@@ -1,12 +1,11 @@
 {{#partial "contenido"}}
   
 <div class="titulo">DARKSOULS SAGA</div>
-<div class=contenido-principal">
+<div class="contenido-principal" style="margin-top: -50px;">
 
    <style>
     table {
       width: 100%;
-      
       margin-top: 20px;
     }
 
@@ -17,16 +16,30 @@
     img {
       width: 100%;
       height: auto;
+      transition: transform 0.3s ease; /* Añadir transición suave */
+    }
+
+    img:hover {
+      transform: scale(1.1); /* Escalar la imagen al pasar el mouse */
     }
 
     #cambiarImagenes {
       margin-top: 10px;
       cursor: pointer;
     }
-    
-    
-    
-    
+
+    .imagen-ampliada img {
+    max-width: 120%;
+    max-height: 120%;
+    transition: transform 0.3s ease-in-out;
+    transform: scale(0.6);  /* Reduce el tamaño inicial */
+}
+
+.imagen-ampliada.mostrar img {
+    transform: scale(0.8);  /* Tamaño reducido en lugar de 100% */
+}
+
+
   </style>
   
   <style>
@@ -41,13 +54,12 @@
 </head>
 <body>
 
-
-
 <!-- Contenedor donde se renderizará la tabla -->
 <div id="mi-contenedor"></div>
 
 <script>
     // Datos
+    /* 
     var fotos = [
         { nombre: '{{foto1.nombre}}', imagen: '{{foto1.imagen}}' },
          { nombre: '{{foto2.nombre}}', imagen: '{{foto2.imagen}}' },
@@ -61,7 +73,13 @@
             
         // ... tus datos ...
     ];
+    */
 
+      var fotos = [];
+
+    {{#each imaganes}}
+        fotos.push({ nombre: "{{this.nombre}}", imagen: "{{this.imagen}}" });
+    {{/each}}
 
     // Inicializa el índice de la tanda actual
     var currentTandaIndex = 0;
@@ -97,9 +115,9 @@
     // Función para generar el HTML de una imagen
     function generarHTMLImagen(foto) {
         return `
-            <a href="#" onclick="ampliarImagen('data:image/png;base64,${foto.imagen}', '${foto.nombre}')">
-                <img src="data:image/png;base64,${foto.imagen}" loading="lazy" alt="${foto.nombre}" width="500" height="500">
-                <figcaption>${foto.nombre}</figcaption>
+            <a href="#" onclick="ampliarImagen('${foto.imagen}', '${foto.nombre}')">
+              <img src="${foto.imagen}" loading="lazy" alt="${foto.nombre}" width="500" height="500">
+              <figcaption>${foto.nombre}</figcaption>
             </a>
         `;
     }
@@ -119,9 +137,7 @@
     // Inicializa la página mostrando la tabla de imágenes
     mostrarTablaImagenes();
     
-    
-    
-       var botonEstilo = 'margin: 5px;';
+    var botonEstilo = 'margin: 5px;';
 
     // Botones "Siguiente Tanda" y "Tanda Anterior"
     var botonTandaAnterior = document.createElement('button');
@@ -142,18 +158,20 @@
     mostrarTablaImagenes();
     document.body.appendChild(botonTandaAnterior);
     document.body.appendChild(botonSiguienteTanda);
+
+    // Función para disminuir la imagen al hacer clic
+    function disminuirImagen(img) {
+        img.style.transform = 'scale(0.9)';
+    }
 </script>
 
 <!-- Botones "Siguiente Tanda" y "Tanda Anterior" -->
 
+<div class="imagen-ampliada" onclick="cerrarImagen()">
+    <img id="imagenAmpliada" src="" alt="Imagen Ampliada">
+</div>
 
-
-    
-    <div class="imagen-ampliada" onclick="cerrarImagen()">
-        <img id="imagenAmpliada" src="" alt="Imagen Ampliada">
-    </div>
-
-   <script>
+<script>
     var scrollPosition;
 
     function ampliarImagen(src, descripcion) {
@@ -164,6 +182,7 @@
         imagenAmpliada.src = src;
         imagenAmpliada.alt = descripcion;
         document.querySelector('.imagen-ampliada').style.display = 'flex';
+       
 
         // Deshabilitar el scroll de la página mientras la imagen está ampliada
         document.body.style.overflow = 'hidden';
@@ -180,8 +199,6 @@
     }
 </script>
 
-
-  
 {{/partial}}
 {{>layout.hbs}}
 

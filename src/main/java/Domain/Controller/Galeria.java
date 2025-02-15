@@ -1,39 +1,24 @@
 package Domain.Controller;
-import spark.ModelAndView;
-import spark.Request;
-import spark.Response;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.mysql.cj.jdbc.Blob;
-
-import APIs.EmailAPI.abmCBU;
-import APIs.Entidades.CBU;
-import Domain.DarkSoulRepo;
-import Domain.GaleriaRepo;
-import Domain.GodRepo;
-import Domain.ImagenRepo;
-import Domain.MKRepo;
-import Domain.Repositorio;
-import Domain.RepositorioPublicacion;
 import Domain.Galeria.DarkSoul;
 import Domain.Galeria.GOD;
 import Domain.Galeria.Imagen;
 import Domain.Galeria.ImagenDTO;
 import Domain.Galeria.MK;
-import Domain.Publicacion.PublicacionTemplate;
-import Domain.Usuario.Usuario;
+import Domain.GodRepo;
+import Domain.ImagenRepo;
+import Domain.MKRepo;
 import Domain.Utilitario.Const;
+import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
 
 
 
@@ -135,8 +120,9 @@ public abstract class Galeria implements  Serializable {
     	  Map<String, Object> model = new HashMap<>();
           model.put("logged", req.session().attribute(Const.ID_USUARIO));
           model.put("banner", true);
-          DarkSoulRepo rep= new DarkSoulRepo();
-          List<DarkSoul> imagenes= rep.obtenerTodos();
+          //DarkSoulRepo rep= new DarkSoulRepo();
+          
+          
           ImagenDTO imagen = new ImagenDTO();
           ImagenDTO imagen2 = new ImagenDTO();
           ImagenDTO imagen3 = new ImagenDTO();
@@ -146,39 +132,55 @@ public abstract class Galeria implements  Serializable {
           ImagenDTO imagen7 = new ImagenDTO();
           ImagenDTO imagen8 = new ImagenDTO();
          
+          String rds1 = "ds1.jpg";
+          String rds2 = "bloodborne.jpg";
+          String rds3 = "ds3.jpg";
+          String rds4 = "sekiro.jpg";
+          String rds5 = "demonsoul.jpg";
+          String rds6 = "eldenring.jpg";
+          String rds7 = "dstrilogy2.jpg";
+          String rds8 = "dstrilogy.jpg";
           
           
-          String imagenbase64  = ImagenDTO.convertBlobToBase64(imagenes.get(0).getImagen());
-          String imagen2base64  = ImagenDTO.convertBlobToBase64(imagenes.get(1).getImagen());
-          String imagen3base64  = ImagenDTO.convertBlobToBase64(imagenes.get(2).getImagen());
-          String imagen4base64  = ImagenDTO.convertBlobToBase64(imagenes.get(3).getImagen());
-          String imagen5base64  = ImagenDTO.convertBlobToBase64(imagenes.get(4).getImagen());
-          String imagen6base64  = ImagenDTO.convertBlobToBase64(imagenes.get(5).getImagen());
-          String imagen7base64  = ImagenDTO.convertBlobToBase64(imagenes.get(6).getImagen());
-          String imagen8base64  = ImagenDTO.convertBlobToBase64(imagenes.get(7).getImagen());
-         
+          DarkSoul ds = new DarkSoul();
+          DarkSoul ds2 = new DarkSoul();
+          DarkSoul ds3 = new DarkSoul();
+          DarkSoul ds4 = new DarkSoul();
+          DarkSoul ds5 = new DarkSoul();
+          DarkSoul ds6 = new DarkSoul();
+          DarkSoul ds7 = new DarkSoul();
+          DarkSoul ds8 = new DarkSoul();
+          
+          ds.setNombre("DARKSOULS - PS3");
+          ds2.setNombre("BLOODBORNE - PS4");
+          ds3.setNombre("DARKSOULS 3 COMPLETE EDITION - PS4");
+          ds4.setNombre("SEKIRO™: SHADOWS DIE TWICE - PS4");
+          ds5.setNombre("DEMON SOULS - PS5");
+          ds6.setNombre("ELDEN RING - PS5");
+          ds7.setNombre("DARKSOULS TRILOGY - PS4");
+          ds8.setNombre("DARKSOULS TRILOGY - PS4");
+
           
           
-          
-          imagen.setImagen(imagenbase64);
-          imagen2.setImagen(imagen2base64);
-          imagen3.setImagen(imagen3base64);
-          imagen4.setImagen(imagen4base64);
-          imagen5.setImagen(imagen5base64);
-          imagen6.setImagen(imagen6base64);
-          imagen7.setImagen(imagen7base64);
-          imagen8.setImagen(imagen8base64);
+          imagen.setImagen(rds1);
+          imagen2.setImagen(rds2);
+          imagen3.setImagen(rds3);
+          imagen4.setImagen(rds4);
+          imagen5.setImagen(rds5);
+          imagen6.setImagen(rds6);
+          imagen7.setImagen(rds7);
+          imagen8.setImagen(rds8);
        
         
           
-          imagen.setNombre(imagenes.get(0).getNombre());
-          imagen2.setNombre(imagenes.get(1).getNombre());
-          imagen3.setNombre(imagenes.get(2).getNombre());
-          imagen4.setNombre(imagenes.get(3).getNombre());
-          imagen5.setNombre(imagenes.get(4).getNombre());
-          imagen6.setNombre(imagenes.get(5).getNombre());
-          imagen7.setNombre(imagenes.get(6).getNombre());
-          imagen8.setNombre(imagenes.get(7).getNombre());
+          imagen.setNombre( "DARKSOULS - PS3");
+          imagen2.setNombre("BLOODBORNE - PS4");
+          imagen3.setNombre("DARKSOULS 3 COMPLETE EDITION - PS4");
+          imagen4.setNombre("SEKIRO™: SHADOWS DIE TWICE - PS4");
+          imagen5.setNombre("DEMON SOULS - PS5");
+          imagen6.setNombre("ELDEN RING - PS5");
+          imagen7.setNombre("DARKSOULS TRILOGY - PS4");
+          imagen8.setNombre("DARKSOULS TRILOGY - PS4");
          
           
          
@@ -190,9 +192,26 @@ public abstract class Galeria implements  Serializable {
           model.put("foto6", imagen6);
           model.put("foto7", imagen7);
           model.put("foto8", imagen8);
-    
-        
-          return new ModelAndView(model, "DarkSouls.hbs");
+
+          
+
+// Agregar cada imagen como un mapa con su nombre y URL
+// Agregar cada imagen como un mapa con su nombre y URL
+List<ImagenDTO> imaganes = new ArrayList<>();
+
+imaganes.add(imagen);
+imaganes.add(imagen2);
+imaganes.add(imagen3);
+imaganes.add(imagen4);
+imaganes.add(imagen5);
+imaganes.add(imagen6);
+imaganes.add(imagen7);
+imaganes.add(imagen8);
+
+// Guardar la lista en el model
+model.put("imaganes", imaganes);
+
+return new ModelAndView(model, "DarkSouls.hbs");
       }
     
     

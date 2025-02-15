@@ -1,7 +1,6 @@
 package Domain.Server;
 
 import spark.Spark;
-
 import static spark.debug.DebugScreen.enableDebugScreen;
 
 public final class Server {
