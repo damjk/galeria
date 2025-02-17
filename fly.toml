@@ -1,4 +1,4 @@
-app = "nombre-de-tu-aplicacion"
+app = "galeria"
 
 [build]
   dockerfile = "Dockerfile"
