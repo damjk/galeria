@@ -1,19 +1,30 @@
-app = "galeria"
+# fly.toml app configuration file generated for galeria on 2025-02-16T23:03:23-03:00
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'galeria'
+primary_region = 'eze'
 
 [build]
-  dockerfile = "Dockerfile"
+  dockerfile = 'Dockerfile'
 
 [env]
-  PORT = "4567"
+  PORT = '4567'
 
 [[services]]
+  protocol = 'tcp'
   internal_port = 4567
-  protocol = "tcp"
 
   [[services.ports]]
-    handlers = ["http"]
     port = 80
+    handlers = ['http']
 
   [[services.ports]]
-    handlers = ["tls", "http"]
     port = 443
+    handlers = ['tls', 'http']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
